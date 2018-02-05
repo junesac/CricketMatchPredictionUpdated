@@ -1,12 +1,16 @@
 package com.service.helper;
 
-public abstract class EventProcessor {
+public class Event {
 
 	protected boolean strikeChange;
 	protected int runScored;
-	protected boolean isOut = false;
+	protected boolean isOut;
 
-	public abstract void process();
+	public Event(boolean strikeChange, int runScored, boolean isOut) {
+		this.strikeChange = strikeChange;
+		this.runScored = runScored;
+		this.isOut = isOut;
+	}
 
 	public boolean isStrikeChange() {
 		return strikeChange;

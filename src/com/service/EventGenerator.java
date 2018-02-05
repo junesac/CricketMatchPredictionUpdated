@@ -2,73 +2,45 @@ package com.service;
 
 import com.model.Player;
 import com.model.PlayerStats;
-import com.service.helper.EventProcessor;
-import com.service.helper.impl.FiveRunsEvent;
-import com.service.helper.impl.FourRunsEvent;
-import com.service.helper.impl.OneRunEvent;
-import com.service.helper.impl.OutEvent;
-import com.service.helper.impl.SixRunsEvent;
-import com.service.helper.impl.ThreeRunsEvent;
-import com.service.helper.impl.TwoRunsEvent;
-import com.service.helper.impl.ZeroRunEvent;
+import com.service.helper.Event;
 
 public class EventGenerator {
 
-	private final OutEvent outEvent;
-	private final OneRunEvent oneRunEvent;
-	private final TwoRunsEvent twoRunsEvent;
-	private final ThreeRunsEvent threeRunsEvent;
-	private final FourRunsEvent fourRunsEvent;
-	private final FiveRunsEvent fiveRunsEvent;
-	private final SixRunsEvent sixRunsEvent;
-	private final ZeroRunEvent zeroRunEvent;
-
-	public EventGenerator() {
-		this.oneRunEvent = new OneRunEvent();
-		this.twoRunsEvent = new TwoRunsEvent();
-		this.threeRunsEvent = new ThreeRunsEvent();
-		this.fourRunsEvent = new FourRunsEvent();
-		this.fiveRunsEvent = new FiveRunsEvent();
-		this.sixRunsEvent = new SixRunsEvent();
-		this.outEvent = new OutEvent();
-		this.zeroRunEvent = new ZeroRunEvent();
-	}
-
-	public EventProcessor generateEvent(Player player) {
+	public Event generateEvent(Player player) {
 
 		int number = (int) Math.floor(Math.random() * 101);
 		PlayerStats stats = player.getPlayerStats();
 
 		if (number <= stats.getCummulativeDotBall()) {
-			return zeroRunEvent;
+			return new Event(false, 0, false);
 		}
 
 		if (number <= stats.getCummulativeOne()) {
-			return oneRunEvent;
+			return new Event(true, 1, false);
 		}
 
 		if (number <= stats.getCummulativeTwo()) {
-			return twoRunsEvent;
+			return new Event(false, 2, false);
 		}
 
 		if (number <= stats.getCummulativeThree()) {
-			return threeRunsEvent;
+			return new Event(true, 3, false);
 		}
 
 		if (number <= stats.getCummulativeFour()) {
-			return fourRunsEvent;
+			return new Event(false, 4, false);
 		}
 
 		if (number <= stats.getCummulativeFive()) {
-			return fiveRunsEvent;
+			return new Event(true, 5, false);
 		}
 
 		if (number <= stats.getCummulativeSix()) {
-			return sixRunsEvent;
+			return new Event(false, 6, false);
 		}
 
 		if (number <= stats.getCummulativeOut()) {
-			return outEvent;
+			return new Event(false, 0, true);
 		}
 
 		return null;

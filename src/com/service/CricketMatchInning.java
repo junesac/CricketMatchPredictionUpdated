@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.model.Player;
-import com.service.helper.EventProcessor;
+import com.service.helper.Event;
 
 public class CricketMatchInning {
 
@@ -123,22 +123,31 @@ public class CricketMatchInning {
 			// If player got out then bring the new Player.
 			getPlayerInCasePlayerOnStrikeGotOut(players);
 
-			EventProcessor event = eventGenerator.generateEvent(striker);
+			Event event = eventGenerator.generateEvent(striker);
 			checkNotNull(event);
 
-			event.process();
 			striker.bowlPlayed();
-			
+
 			actualBallsBowled++;
 
 			if (event.isOut()) {
 				setOut();
-			}
-			else {
+			} else {
 				addRun(event.getRunScored());
 			}
 
-			if (event.isStrikeChange() || actualBallsBowled % 6 == 0) {
+			/**
+			 * Scenario : strike change if player take odd number of runs : 1,
+			 * 3, 5
+			 */
+			if (event.isStrikeChange()) {
+				changeStrike();
+			}
+
+			/**
+			 * Scenario : strike change on the last ball of the over.
+			 */
+			if (actualBallsBowled % 6 == 0) {
 				changeStrike();
 			}
 		}
