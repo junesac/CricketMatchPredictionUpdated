@@ -1,8 +1,8 @@
 package com.service;
 
+import com.model.Event;
 import com.model.Player;
 import com.model.PlayerStats;
-import com.service.helper.Event;
 
 public class EventGenerator {
 

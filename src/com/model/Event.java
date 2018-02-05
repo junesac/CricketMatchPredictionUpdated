@@ -1,10 +1,10 @@
-package com.service.helper;
+package com.model;
 
 public class Event {
 
-	protected boolean strikeChange;
-	protected int runScored;
-	protected boolean isOut;
+	private boolean strikeChange;
+	private int runScored;
+	private boolean isOut;
 
 	public Event(boolean strikeChange, int runScored, boolean isOut) {
 		this.strikeChange = strikeChange;

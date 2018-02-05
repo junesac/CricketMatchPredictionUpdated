@@ -3,8 +3,8 @@ package com.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.model.Event;
 import com.model.Player;
-import com.service.helper.Event;
 
 public class CricketMatchInning {
 
